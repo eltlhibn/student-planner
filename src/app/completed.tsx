@@ -2,11 +2,11 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   FlatList,
 } from "react-native";
 
 import { useTasks } from "../context/TaskContext";
+import { styles } from "../styles/completedStyles";
 
 export default function CompletedScreen() {
   const { tasks } = useTasks();
@@ -26,7 +26,7 @@ export default function CompletedScreen() {
         keyExtractor={(item) => item.id}
         ListEmptyComponent={
           <Text style={styles.empty}>
-            No completed tasks yet.
+            ✅ No completed tasks yet.
           </Text>
         }
         renderItem={({ item }) => (
@@ -56,61 +56,3 @@ export default function CompletedScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#F5F3FF",
-  },
-
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#6D28D9",
-    marginBottom: 15,
-  },
-
-  empty: {
-    textAlign: "center",
-    marginTop: 40,
-    fontSize: 16,
-    color: "#6B7280",
-  },
-
-  card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-    padding: 16,
-    marginBottom: 14,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-
-    elevation: 4,
-  },
-
-  taskTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#4C1D95",
-    marginBottom: 8,
-  },
-
-  info: {
-    fontSize: 15,
-    marginBottom: 4,
-    color: "#374151",
-  },
-
-  completed: {
-    marginTop: 8,
-    fontWeight: "bold",
-    color: "#16A34A",
-  },
-});

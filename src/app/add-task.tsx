@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import {
   Text,
   TextInput,
-  Button,
-  StyleSheet,
   Alert,
   ScrollView,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 import { useTasks } from "../context/TaskContext";
+import { styles } from "../styles/addTaskStyles";
 
 export default function AddTaskScreen() {
   const { addTask } = useTasks();
@@ -88,51 +89,83 @@ export default function AddTaskScreen() {
         multiline
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Priority (High / Medium / Low)"
-        value={priority}
-        onChangeText={setPriority}
-      />
+      <Text style={styles.priorityLabel}>
+        Priority
+      </Text>
 
-      <Button
-        title="Add Task"
+      <View style={styles.priorityContainer}>
+        <TouchableOpacity
+          style={[
+            styles.priorityButton,
+            priority === "High" &&
+              styles.selectedPriority,
+          ]}
+          onPress={() =>
+            setPriority("High")
+          }
+        >
+          <Text
+            style={[
+              styles.priorityText,
+              priority === "High" &&
+                styles.selectedPriorityText,
+            ]}
+          >
+            High
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.priorityButton,
+            priority === "Medium" &&
+              styles.selectedPriority,
+          ]}
+          onPress={() =>
+            setPriority("Medium")
+          }
+        >
+          <Text
+            style={[
+              styles.priorityText,
+              priority === "Medium" &&
+                styles.selectedPriorityText,
+            ]}
+          >
+            Medium
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.priorityButton,
+            priority === "Low" &&
+              styles.selectedPriority,
+          ]}
+          onPress={() =>
+            setPriority("Low")
+          }
+        >
+          <Text
+            style={[
+              styles.priorityText,
+              priority === "Low" &&
+                styles.selectedPriorityText,
+            ]}
+          >
+            Low
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
+        style={styles.addButton}
         onPress={handleAddTask}
-      />
+      >
+        <Text style={styles.addButtonText}>
+          Add Task
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5F3FF",
-    padding: 20,
-  },
-
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#6D28D9",
-    marginBottom: 20,
-  },
-
-  input: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 15,
-    padding: 14,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#DDD6FE",
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-
-    elevation: 2,
-  },
-});
